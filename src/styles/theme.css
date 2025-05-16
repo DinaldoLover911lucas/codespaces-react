@@ -1,0 +1,7 @@
+:root {
+    --imperial-red: #f15152ff;      /* Cor base */
+    --imperial-red-light: #f47c7dff; /* Mais clara */
+    --imperial-red-dark: #b23a3bff;  /* Mais escura */
+    --imperial-red-muted: #f7a3a4ff; /* Suave/pastel */
+    --imperial-red-deep: #7a2324ff;  /* Bem escura */
+}
