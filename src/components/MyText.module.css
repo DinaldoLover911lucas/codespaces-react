@@ -1,0 +1,28 @@
+.container {
+  margin: 0auto;
+  max-width: 80rem;
+
+}
+
+
+
+.div{
+   background-color: var(--imperial-red-light);
+   color: var(--imperial-red);
+   box-shadow: 0 0 1rem var(--imperial-red-dark);
+   padding: 3rem;
+   margin: 3rem 5rem;
+   border-radius: 2rem;  
+   
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--imperial-red);
+}
+
+.text {
+  font-size: 1rem;
+  color: var(--imperial-red-dark);
+}
