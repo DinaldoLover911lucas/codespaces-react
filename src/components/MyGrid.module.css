@@ -26,6 +26,9 @@
 .header1 {
   grid-area: header1;
   background-color: darkslateblue;
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .header2 {
@@ -36,20 +39,33 @@
 .aside {
   grid-area: aside;
   background-color: darkseagreen;
+  @media (max-width: 768px) {
+    display: none;
+  }
+
 }
 .aside2 {
   grid-area: aside2;
   background-color: lightcoral;
+  @media (max-width: 1200px) {
+    display: none;
+  }
 }
 
 .footer {
   grid-area: footer;
   background-color: darkslategray;
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .footer2 {
   grid-area: footer2;
   background-color: lightgray;
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 
