@@ -1,22 +1,28 @@
-import styles from './MyTextList.module.css';
-import { MyText } from './MyText';
+import styles from "./MyTextList.module.css";
+import { MyText } from "./MyText";
 
 export function MyTextList() {
-    const texts = [
+  const texts = [
     { title: "Meu título", text: "Meu texto" },
     { title: "Meu título", text: "Meu texto" },
     { title: "Meu título", text: "Meu texto" },
     { title: "Meu título", text: "Meu texto" },
     { title: "Meu título", text: "Meu texto" },
-    ];
+    { title: "Meu título", text: "Meu texto" },
+  ];
 
-    return (
-        <div className={styles.container}>
-            {texts.map((item, index) => (
-                <MyText key={index} title={item.title}>
-                    {item.text}
-                </MyText>
-            ))}
-        </div>
-    );
+  return (
+    <>
+      <h1 className={styles.title}>Lista de Textos</h1>
+      <div className={styles.container}>
+        {texts.map((text, index) => {
+          return (
+            <MyText key={index} title={`${text.title} ${index + 1}`}>
+              {text.text}
+            </MyText>
+          );
+        })}
+      </div>
+    </>
+  );
 }
