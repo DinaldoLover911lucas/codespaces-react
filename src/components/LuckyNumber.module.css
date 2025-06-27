@@ -12,17 +12,21 @@
     font-size: 3rem;
     gap: 2rem;
     padding: 3rem;
-    color: rgb(37, 100, 234);
+    color: rgb(34, 63, 126);
 }
+
+
 
 .button {
     background-color: rgba(15, 21, 33, 255);
     padding: 1rem 2rem;
-    color: rgb(37, 100, 234);
+    color: rgb(255, 255, 255);
     border-color: rgb(37, 100, 234);
+    
     font-size: 1.5rem;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    
+    
     
 }
 
