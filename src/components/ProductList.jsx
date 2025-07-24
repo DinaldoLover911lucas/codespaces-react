@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
 import styles from "./ProductList.module.css";
+import { useEffect, useState } from "react";
+import { Product } from "./Product.jsx";
 import { CircularProgress } from "@mui/material";
-import { Product } from "./Product";
 
-export function ProductList({ addToCart }) {
-  var category = "beauty";
-  var limit = 12;
+export function ProductList({ addToCart, removeFromCart }) {
+  var category =  "smartphones"; // Example category, can be dynamic
+  var limit = 20;
   var apiUrl = `https://dummyjson.com/products/category/${category}?limit=${limit}&select=id,thumbnail,title,price,description`;
-
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  var [carrinho, setCarrinho] = useState([]);
+  var [total, setTotal] = useState(0);
+   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -27,16 +28,19 @@ export function ProductList({ addToCart }) {
     }
     setTimeout(() => {
       fetchProducts();
-    }, 2000);
+    }, 100);
   }, []);
+  
+
   return (
     <div className={styles.container}>
-      <div className={styles.grid}>
-        {products.map((product) => (
-          <Product key={product.id} product={product} addToCart={addToCart} />
+       <div className= {styles.main}>
+       {products.map((product) => (
+      <Product key={product.id} product={product} addToCart={addToCart} removeFromCart={removeFromCart}/>
+        
         ))}
-      </div>
-      {loading && (
+        </div>
+         {loading && (
         <div>
           <CircularProgress
             // size="sm"
