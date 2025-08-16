@@ -1,46 +1,21 @@
 import styles from "./ProductList.module.css";
-import { useEffect, useState } from "react";
-import { Product } from "./Product.jsx";
 import { CircularProgress } from "@mui/material";
+import { Product } from "./Product";
+import { useContext } from "react";
+import { CartContext } from "../service/CartContext";
 
-export function ProductList({ addToCart, removeFromCart }) {
-  var category =  "smartphones"; // Example category, can be dynamic
-  var limit = 20;
-  var apiUrl = `https://dummyjson.com/products/category/${category}?limit=${limit}&select=id,thumbnail,title,price,description`;
-  const [products, setProducts] = useState([]);
-  var [carrinho, setCarrinho] = useState([]);
-  var [total, setTotal] = useState(0);
-   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+export function ProductList() {
 
-  useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-
-        setProducts(data.products);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    setTimeout(() => {
-      fetchProducts();
-    }, 100);
-  }, []);
-  
+  const { products, loading, error } = useContext(CartContext);
 
   return (
     <div className={styles.container}>
-       <div className= {styles.main}>
-       {products.map((product) => (
-      <Product key={product.id} product={product} addToCart={addToCart} removeFromCart={removeFromCart}/>
-        
+      <div className={styles.grid}>
+        {products.map((product) => (
+          <Product key={product.id} product={product} />
         ))}
-        </div>
-         {loading && (
+      </div>
+      {loading && (
         <div>
           <CircularProgress
             // size="sm"

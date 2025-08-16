@@ -1,80 +1,43 @@
 import styles from "./Cart.module.css";
+import { useContext } from "react";
+import { CartContext } from "../service/CartContext";
 
-export function Cart({ cart, removeFromCart, addToCart }) {
-  // Agrupa produtos únicos e soma as quantidades
-  const productMap = {};
-  cart.forEach((product) => {
-    if (productMap[product.id]) {
-      productMap[product.id].quantity += 1;
-    } else {
-      productMap[product.id] = { ...product, quantity: 1 };
-    }
-  });
-
-  const uniqueProducts = Object.values(productMap);
+export function Cart() {
+  const { cart, updateQtyCart, clearCart } = useContext(CartContext);
 
   return (
     <div className={styles.cart}>
-      <h2 className={styles.title}>Shopping Cart</h2>
-      {uniqueProducts.length === 0 ? (
-        <p className={styles.empty}>Your cart is empty</p>
+      <h2>Shopping Cart</h2>
+      {cart.length === 0 ? (
+        <p>Your cart is empty.</p>
       ) : (
-        <>
-          <ul className={styles.cartList}>
-            {uniqueProducts.map((product) => (
-              <li key={product.id}>
-                <div className={styles.cartItem}>
-                  <img src={product.thumbnail} alt={product.title} />
-                  <h3>{product.title}</h3>
-                  <button
-                    onClick={() => removeFromCart(product)}
-                    disabled={product.quantity === 1}
-                  >
-                    -
-                  </button>
-                  <p>{product.quantity}</p>
-                  <button onClick={() => addToCart(product)}>+</button>
-                  <p>${(product.price * product.quantity).toFixed(2)}</p>
-                  <button
-                    onClick={() => {
-                      for (let i = 0; i < product.quantity; i++) {
-                        removeFromCart(product);
-                      }
-                    }}
-                  >
-                    Remove
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
-          <div className={styles.checkout}>
-            <h1>Resumo: </h1> <br />
-            <ul>
-              {uniqueProducts.map((product) => (
-                <li
-                  key={product.id}
-                  style={{ fontSize: "2rem", marginBottom: "1rem" }}
+        <ul>
+          {cart.map((product, index) => (
+            <li key={index} className={styles.cartItem}>
+              <img src={product.thumbnail} alt={product.title} />
+              <h3>{product.title}</h3>
+              <p>${product.price.toFixed(2)}</p>
+              <div className={styles.quantity}>
+                <button
+                  onClick={() =>
+                    updateQtyCart(product.id, product.quantity - 1)
+                  }
+                  disabled={product.quantity <= 1}
                 >
-                  <strong>{product.title}</strong> — {product.quantity}x — $
-                  {(product.price * product.quantity).toFixed(2)}
-                </li>
-              ))}
-            </ul>
-            <br />
-            <h3>
-              Total: $
-              {uniqueProducts
-                .reduce(
-                  (total, product) => total + product.price * product.quantity,
-                  0
-                )
-                .toFixed(2)}
-            </h3>
-            <br />
-            <button>Continuar</button>
-          </div>
-        </>
+                  -
+                </button>
+                <span>{product.quantity}</span>
+                <button
+                  onClick={() =>
+                    updateQtyCart(product.id, product.quantity + 1)
+                  }
+                >
+                  +
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );
